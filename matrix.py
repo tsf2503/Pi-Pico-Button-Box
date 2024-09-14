@@ -40,7 +40,7 @@ class ButtonMatrix:
             for row_num, row in enumerate(self.rows):
                 if row.value != 1: continue
 
-                if col_num == 6:
+                if col_num == 5:
                     button_num = 30 + row_num
                 else:
                     button_num = (row_num + 2)* 5 + col_num + 1
@@ -50,15 +50,15 @@ class ButtonMatrix:
 
     def SwitchCheck(self):
         for col_num, col in enumerate(self.switch_cols):
-            if col_num == 5: continue
             col.value = 1
-            # print(col_num)
             for row_num, row in enumerate(self.switch_rows):
-                # time.sleep(1)
-                button_num = row_num * 5 + col_num + 1
-                # print(row_num, row.value, self.switch_status,)
-                if row.value == self.switch_status[button_num - 1]: continue
-                self.switch_status[button_num - 1] = row.value
+                num = row_num * 6 + col_num
+                if row.value == self.switch_status[num]: continue
+                self.switch_status[num] = row.value
+                if col_num == 5:
+                    button_num = 30 + row_num
+                else:
+                    button_num = (row_num)* 5 + col_num + 1
                 if row.value == 1:
                     self.PressButton(button_num)
                 else:
